@@ -1,0 +1,122 @@
+definitions:
+  models.CreateBookInput:
+    properties:
+      author:
+        type: string
+      title:
+        type: string
+    required:
+    - author
+    - title
+    type: object
+host: localhost:7010
+info:
+  contact: {}
+  description: This is the rest-api documentation
+  title: rest-api DOC
+  version: beta
+paths:
+  /api/book:
+    post:
+      consumes:
+      - application/json
+      description: Create new book
+      parameters:
+      - description: book data
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - Authorization: []
+      summary: Create new book
+  /api/book/:id:
+    delete:
+      description: Delete a book
+      parameters:
+      - description: book identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - Authorization: []
+      summary: Delete a book
+    get:
+      description: Find a book
+      parameters:
+      - description: book identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - Authorization: []
+      summary: Find a book
+    patch:
+      consumes:
+      - application/json
+      description: Update a book
+      parameters:
+      - description: book identifier
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: book data
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - Authorization: []
+      summary: Update a book
+  /api/books:
+    get:
+      description: Get all books
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      security:
+      - Authorization: []
+      summary: Get all books
+securityDefinitions:
+  Authorization:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

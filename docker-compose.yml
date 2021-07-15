@@ -1,0 +1,48 @@
+version: '3'
+services:
+  book_store:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/go/src/rest-api/
+    environment:
+      MYSQL_DATABASE: rest_default
+      MYSQL_USER: rest_default
+      MYSQL_PASSWORD: UzTQ4356NffpN3i8
+    ports:
+      - "7010:8080"
+    depends_on:
+      - mysql_store
+    networks:
+      - rest-api
+
+  mysql_store:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=rest_default
+      - MYSQL_USER=rest_default
+      - MYSQL_PASSWORD=UzTQ4356NffpN3i8
+      - MYSQL_ROOT_PASSWORD=UzTQ4356NffpN3i8
+    volumes:
+      - ${MYSQL_PATH}:/var/lib/mysql:rw
+    networks:
+      - rest-api
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql_store
+    networks:
+      - rest-api
+    ports:
+      - "7011:80"
+    depends_on:
+      - mysql_store
+    restart: always
+
+networks:
+  rest-api:
+    external:
+      name: book-store-network
