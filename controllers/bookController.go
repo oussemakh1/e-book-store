@@ -99,7 +99,7 @@ func (h BookController) UpdateBook(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+	
 	}
 
 	// Validate input

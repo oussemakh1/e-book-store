@@ -3,10 +3,13 @@ definitions:
     properties:
       author:
         type: string
+      author_id:
+        type: integer
       title:
         type: string
     required:
     - author
+    - author_id
     - title
     type: object
 host: localhost:7010

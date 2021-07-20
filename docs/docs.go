@@ -189,11 +189,15 @@ var doc = `{
             "type": "object",
             "required": [
                 "author",
+                "author_id",
                 "title"
             ],
             "properties": {
                 "author": {
                     "type": "string"
+                },
+                "author_id": {
+                    "type": "integer"
                 },
                 "title": {
                     "type": "string"

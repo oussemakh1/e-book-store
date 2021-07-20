@@ -51,5 +51,6 @@ func Migrate() error {
 	}
 	//Migrate tables
 	db.AutoMigrate(&models.Book{})
+	db.AutoMigrate(&models.User{})
 	return nil
 }

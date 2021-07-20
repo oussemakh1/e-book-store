@@ -85,3 +85,28 @@ func DeleteBook(id int) error {
 	}
 	return nil
 }
+
+func FindMyBooks(id int)(books []models.Book, err error) {
+	db, err := database.GetDB("DEV")
+	defer db.Close()
+	if err != nil {
+		return books, err
+	}
+	if err := db.Table("books").Where("author_id = ?",id).Find(&books).Error; err != nil {
+		return books, err
+	}
+	return books, nil
+}
+
+func FindMyBook(author_id,id int)(book models.Book, err error) {
+	db, err := database.GetDB("DEV")
+	defer db.Close()
+	if err != nil {
+		return book, err
+	}
+
+	if err := db.Table("books").Where("id = ? AND author_id = ?",id,author_id).Find(&book).Error; err != nil {
+		return book, err
+	}
+	return book, nil
+}
